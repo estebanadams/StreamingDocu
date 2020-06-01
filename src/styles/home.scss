@@ -1,0 +1,23 @@
+.home-container {
+  .categorie {
+    margin-top: 1vh;
+    > .title {
+      padding: 2vh 0vh;
+      font-size: 2vh;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+}
+.video-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  .video-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}

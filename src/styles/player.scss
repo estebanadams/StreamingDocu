@@ -1,0 +1,40 @@
+.video-container {
+  padding-top: 4vh;
+  width: 90%;
+  margin: 0 5%;
+  .player {
+    video {
+      width: 100%;
+      border-radius: 20px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .title {
+    font-size: 2.2vh;
+    line-height: 6vh;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+    color: grey;
+    padding-bottom: 2vh;
+    border-bottom: #f2f2f2 1px solid;
+  }
+
+  .description {
+    padding-top: 2vh;
+    > .title {
+      font-size: 2vh;
+      line-height: 6vh;
+      font-weight: 400;
+    }
+    .content {
+      line-height: 2vh;
+      color: grey;
+    }
+  }
+}
