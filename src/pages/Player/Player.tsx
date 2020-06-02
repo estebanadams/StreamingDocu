@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import { Link, useRouteMatch, useLocation } from "react-router-dom";
 import "../../styles/player.scss";
-import { bindExpression } from "@babel/types";
+import { DesktopOutlined } from "@ant-design/icons";
 
 interface videoObj {
   id: number;
@@ -46,7 +46,15 @@ const Player: React.FC<PlayerProps> = props => {
     return (
       <div className="video-container">
         <div className="player">
-          <video controls src={video.src}></video>
+          <video preload="auto" controls src={video.src}></video>
+          {/* <div className="controls">
+            <div className="red-b">
+              <div className="time"></div>
+              <div className="buttons">
+                <div className="play"></div>
+              </div>
+            </div>
+          </div> */}
         </div>
         <div className="title">{video.title}</div>
         <div className="info">
@@ -61,7 +69,7 @@ const Player: React.FC<PlayerProps> = props => {
     );
   }
   // @ts-ignore-end
-  return <div className="loading">Loading...</div>;
+  return null;
 };
 
 export default Player;
