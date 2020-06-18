@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import VideoTile from "../../components/VideoTile";
 import "../../styles/home.scss";
 
@@ -25,11 +26,15 @@ const Home: React.FC<HomeProps> = props => {
       <div className="categorie">
         <div className="title">Trending</div>
         <div className="video-wrapper">
-          {videos.map(video => (
-            <VideoTile video={video}></VideoTile>
-          ))}
+          {videos.map(video => {
+            console.log("video", video);
+            return <VideoTile video={video}></VideoTile>;
+          })}
         </div>
       </div>
+      <Link to="/add">
+        <div className="add">+</div>
+      </Link>
     </div>
   );
 };

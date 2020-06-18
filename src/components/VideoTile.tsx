@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "../styles/videotile.scss";
 import { Link, useRouteMatch, useLocation } from "react-router-dom";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 interface videoObj {
   id: number;
@@ -20,7 +19,8 @@ interface VideoProps {
 
 const VideoTile: React.FC<VideoProps> = props => {
   const { video } = props;
-  console.log(video);
+  // console.log(video);
+
   return (
     <div className="videotile-container">
       <Link to={"/video/" + video.id}>
@@ -31,7 +31,7 @@ const VideoTile: React.FC<VideoProps> = props => {
 
         <div className="title">{video.title}</div>
         <div className="info">
-          <div className="views">100 views</div>
+          <div className="views">{video.views} views</div>
           <div className="date">{video.date}</div>
         </div>
       </Link>

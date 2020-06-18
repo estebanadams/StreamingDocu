@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
+import { firestore } from "../../services/firebase";
 import { Link, useRouteMatch, useLocation } from "react-router-dom";
 import "../../styles/player.scss";
 import { DesktopOutlined } from "@ant-design/icons";
@@ -19,7 +20,7 @@ interface PlayerProps {
   videos: videoObj[];
 }
 
-const selectVid = (videos: videoObj[], id: number) => {
+const selectVideo = (videos: videoObj[], id: number) => {
   for (let video of videos) {
     if (video.id == id) return video;
   }
@@ -31,22 +32,37 @@ const Player: React.FC<PlayerProps> = props => {
   const match: any = useRouteMatch("/video/:id");
   const { videos } = props;
   const [video, setVideo]: any = useState(null);
-  console.log(props);
+  // console.log(props);
+  let allPropsLoaded =
+    !video && videos.length && match && !_.isEmpty(match.params);
 
   useEffect(() => {
-    console.log(match);
-    if (match && !_.isEmpty(match.params)) {
-      console.log(match.params);
-      console.log("match", match.params);
-      setVideo(selectVid(videos, match.params.id));
+    if (allPropsLoaded) {
+      // console.log("match", match.params);
+      let matchingVideo: videoObj | null = selectVideo(videos, match.params.id);
+      // console.log("vide", vid, videos);
+      setVideo(matchingVideo);
+      if (matchingVideo) {
+        firestore
+          .collection("videos")
+          .doc(match.params.id)
+          .update({ views: matchingVideo.views + 1 });
+        matchingVideo.views += 1;
+      }
+      console.log("+1 views");
     }
   }, [match]);
-  // @ts-ignore-start
+
   if (video !== null) {
     return (
       <div className="video-container">
         <div className="player">
-          <video preload="auto" controls src={video.src}></video>
+          <video
+            preload="auto"
+            controls
+            src={video.src}
+            poster={video.poster}
+          ></video>
           {/* <div className="controls">
             <div className="red-b">
               <div className="time"></div>
@@ -63,7 +79,7 @@ const Player: React.FC<PlayerProps> = props => {
         </div>
         <div className="description">
           <div className="title">Description</div>
-          <div className="content">{video.description}</div>
+          <div className="content">{video.desc}</div>
         </div>
       </div>
     );
