@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import { firestore } from "../../services/firebase";
-import { Link, useRouteMatch, useLocation } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import "../../styles/player.scss";
-import { DesktopOutlined } from "@ant-design/icons";
 
 interface videoObj {
   id: number;
@@ -22,7 +21,7 @@ interface PlayerProps {
 
 const selectVideo = (videos: videoObj[], id: number) => {
   for (let video of videos) {
-    if (video.id == id) return video;
+    if (video.id === id) return video;
   }
   console.log("Index Not Found");
   return null;
@@ -33,10 +32,11 @@ const Player: React.FC<PlayerProps> = props => {
   const { videos } = props;
   const [video, setVideo]: any = useState(null);
   // console.log(props);
-  let allPropsLoaded =
-    !video && videos.length && match && !_.isEmpty(match.params);
 
   useEffect(() => {
+    let allPropsLoaded =
+      !video && videos.length && match && !_.isEmpty(match.params);
+
     if (allPropsLoaded) {
       // console.log("match", match.params);
       let matchingVideo: videoObj | null = selectVideo(videos, match.params.id);
@@ -51,7 +51,7 @@ const Player: React.FC<PlayerProps> = props => {
       }
       console.log("+1 views");
     }
-  }, [match]);
+  }, [match, videos, video]);
 
   if (video !== null) {
     return (
@@ -63,14 +63,6 @@ const Player: React.FC<PlayerProps> = props => {
             src={video.src}
             poster={video.poster}
           ></video>
-          {/* <div className="controls">
-            <div className="red-b">
-              <div className="time"></div>
-              <div className="buttons">
-                <div className="play"></div>
-              </div>
-            </div>
-          </div> */}
         </div>
         <div className="title">{video.title}</div>
         <div className="info">
@@ -84,7 +76,6 @@ const Player: React.FC<PlayerProps> = props => {
       </div>
     );
   }
-  // @ts-ignore-end
   return null;
 };
 

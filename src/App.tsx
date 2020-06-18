@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
-import {
-  Switch,
-  Route,
-  BrowserRouter as Router,
-  BrowserRouter
-} from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Player from "./pages/Player/Player";
 import Header from "./components/Header";
 import Add from "./pages/Add/Add";
 import "./styles/app.scss";
 import { firestore } from "./services/firebase";
-import VideoTile from "./components/VideoTile";
 
 const App: React.FC = () => {
-  let videosBuffer: any[] = [];
   const [videos, setVideos] = useState<any[]>([]);
 
   useEffect(() => {
+    let videosBuffer: any[] = [];
     firestore
       .collection("videos")
       .get()

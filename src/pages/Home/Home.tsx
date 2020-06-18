@@ -27,7 +27,6 @@ const Home: React.FC<HomeProps> = props => {
         <div className="title">Trending</div>
         <div className="video-wrapper">
           {videos.map(video => {
-            console.log("video", video);
             return <VideoTile video={video}></VideoTile>;
           })}
         </div>

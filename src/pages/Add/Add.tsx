@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { db, firestore } from "../../services/firebase";
+import { firestore } from "../../services/firebase";
 import moment from "moment";
 
 import "../../styles/add.scss";

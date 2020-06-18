@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/videotile.scss";
-import { Link, useRouteMatch, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface videoObj {
   id: number;
