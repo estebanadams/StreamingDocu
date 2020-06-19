@@ -7,6 +7,12 @@ import Add from "./pages/Add/Add";
 import "./styles/app.scss";
 import { firestore } from "./services/firebase";
 
+import IVideo from "./tsDeclaration/IVideo";
+
+const filterByViews = (a: IVideo, b: IVideo) => {
+  return b.views - a.views;
+};
+
 const App: React.FC = () => {
   const [videos, setVideos] = useState<any[]>([]);
 
@@ -21,6 +27,7 @@ const App: React.FC = () => {
           video.id = doc.id;
           videosBuffer.push(video);
         });
+        videosBuffer.sort(filterByViews);
         setVideos(videosBuffer);
       });
   }, []);

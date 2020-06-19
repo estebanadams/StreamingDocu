@@ -23,36 +23,7 @@
   }
 }
 
-@media screen and (min-width: 600px) {
-  .video-wrapper {
-    column-count: 2;
-    column-gap: 2vh;
-    width: 100%;
-    // justify-content: space-between;
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .video-wrapper {
-    column-count: 3;
-    column-gap: 2vh;
-    width: 100%;
-    // justify-content: space-between;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .video-wrapper {
-    column-count: 4;
-    column-gap: 2vh;
-    width: 100%;
-    // justify-content: space-between;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .video-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
+.video-wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }

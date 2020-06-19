@@ -1,17 +1,7 @@
 import React from "react";
 import "../styles/videotile.scss";
 import { Link } from "react-router-dom";
-
-interface videoObj {
-  id: number;
-  title: string;
-  poster: string;
-  src: string;
-  views: number;
-  duration: string;
-  date: string;
-  description: string;
-}
+import videoObj from "../tsDeclaration/IVideo";
 
 interface VideoProps {
   video: videoObj;

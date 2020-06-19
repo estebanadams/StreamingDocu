@@ -1,19 +1,10 @@
-@media screen and (max-width: 600px) {
-  .videotile-container {
-    width: 100%;
-    padding-bottom: 3rem;
-  }
-}
-@media screen and (min-width: 600px) {
-  .videotile-container {
-    width: 100%;
-  }
-}
-
 .videotile-container {
   padding-bottom: 2vh;
   display: block;
   height: 26vh;
+  padding-right: 1vh;
+  padding-left: 1vh;
+
   .thumbnail {
     min-height: 17vh;
     .poster {
@@ -54,5 +45,18 @@
     div {
       color: grey;
     }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .videotile-container {
+    width: 100%;
+    padding-bottom: 3rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  .videotile-container {
+    min-width: 300px;
+    max-width: 400px;
   }
 }
