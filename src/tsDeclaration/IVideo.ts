@@ -1,10 +1,11 @@
 export default interface videoObj {
-  id: number;
+  id: string;
   title: string;
   poster: string;
   src: string;
   views: number;
   duration: string;
   date: string;
-  description: string;
+  desc: string;
+  comment: string[];
 }

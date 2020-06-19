@@ -3,23 +3,27 @@ import _ from "lodash";
 import { firestore } from "../../services/firebase";
 import { useRouteMatch } from "react-router-dom";
 import "../../styles/player.scss";
-
-interface videoObj {
-  id: number;
-  title: string;
-  poster: string;
-  src: string;
-  views: number;
-  duration: string;
-  date: string;
-  description: string;
-}
+import IVideo from "../../tsDeclaration/IVideo";
 
 interface PlayerProps {
-  videos: videoObj[];
+  videos: IVideo[];
 }
 
-const selectVideo = (videos: videoObj[], id: number) => {
+const addComment = (comment: string, video: IVideo, setComment: any) => {
+  if (video && comment.length) {
+    if (!video.comment) video.comment = [];
+    video.comment.push(comment);
+    firestore
+      .collection("videos")
+      .doc(video.id)
+      .update({
+        comment: video.comment
+      });
+    setComment("");
+  }
+};
+
+const selectVideo = (videos: IVideo[], id: string) => {
   for (let video of videos) {
     if (video.id === id) return video;
   }
@@ -30,7 +34,8 @@ const selectVideo = (videos: videoObj[], id: number) => {
 const Player: React.FC<PlayerProps> = props => {
   const match: any = useRouteMatch("/video/:id");
   const { videos } = props;
-  const [video, setVideo]: any = useState(null);
+  const [video, setVideo] = useState<IVideo | null>(null);
+  const [comment, setComment] = useState<string>("");
   // console.log(props);
 
   useEffect(() => {
@@ -39,7 +44,7 @@ const Player: React.FC<PlayerProps> = props => {
 
     if (allPropsLoaded) {
       // console.log("match", match.params);
-      let matchingVideo: videoObj | null = selectVideo(videos, match.params.id);
+      let matchingVideo: IVideo | null = selectVideo(videos, match.params.id);
       // console.log("vide", vid, videos);
       setVideo(matchingVideo);
       if (matchingVideo) {
@@ -72,6 +77,37 @@ const Player: React.FC<PlayerProps> = props => {
         <div className="description">
           <div className="title">Description</div>
           <div className="content">{video.desc}</div>
+        </div>
+        <div className="commentaire">
+          <div className="title">Commentaires</div>
+          <div className="add-comment-container">
+            <input
+              type="text"
+              placeholder="Ajouter un commentaire..."
+              className="add-comment"
+              value={comment}
+              onChange={e => {
+                setComment(e.currentTarget.value);
+                console.log(comment);
+              }}
+            />
+            <button
+              onClick={() => {
+                addComment(comment, video, setComment);
+              }}
+              className="submit-comment"
+            >
+              Ajouter un commentaire
+            </button>
+          </div>
+          {video.comment &&
+            video.comment.map((comment: string, key: number) => {
+              return (
+                <div key={key} className="comment">
+                  {comment}
+                </div>
+              );
+            })}
         </div>
       </div>
     );

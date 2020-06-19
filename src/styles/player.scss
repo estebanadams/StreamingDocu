@@ -1,5 +1,5 @@
 .video-container {
-  padding-top: 4rem;
+  padding-top: 1rem;
   padding-right: 1vh;
   .player {
     position: relative;
@@ -36,6 +36,9 @@
 
   .description {
     padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: #f2f2f2 1px solid;
+
     > .title {
       font-size: 2rem;
       line-height: 2rem;
@@ -44,6 +47,36 @@
     .content {
       line-height: 2rem;
       color: grey;
+    }
+  }
+  .commentaire {
+    .add-comment-container {
+      height: 8rem;
+      .add-comment {
+        line-height: 2rem;
+        font-size: 1rem;
+        border: none;
+        border-bottom: #f2f2f2 1px solid;
+        width: 100%;
+        font-weight: 400;
+      }
+      .submit-comment {
+        float: right;
+        padding: 0.8rem;
+        border: none;
+        color: grey;
+        margin: 1rem;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    .comment {
+      line-height: 2rem;
+      color: grey;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: #f2f2f2 1px solid;
     }
   }
 }

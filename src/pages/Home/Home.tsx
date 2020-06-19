@@ -2,20 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import VideoTile from "../../components/VideoTile";
 import "../../styles/home.scss";
-
-interface videoObj {
-  id: number;
-  title: string;
-  poster: string;
-  src: string;
-  views: number;
-  duration: string;
-  date: string;
-  description: string;
-}
+import IVideo from "../../tsDeclaration/IVideo";
 
 interface HomeProps {
-  videos: videoObj[];
+  videos: IVideo[];
 }
 
 const Home: React.FC<HomeProps> = props => {
@@ -26,8 +16,8 @@ const Home: React.FC<HomeProps> = props => {
       <div className="categorie">
         <div className="title">Trending</div>
         <div className="video-wrapper">
-          {videos.map(video => {
-            return <VideoTile video={video}></VideoTile>;
+          {videos.map((video, key) => {
+            return <VideoTile key={key} video={video}></VideoTile>;
           })}
         </div>
       </div>
